@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/css/flag-icon.min.css"
     />
-    <title>COVID-19 Data - COUNTRY</title>
+    <title>COVID-19 Information</title>
   </head>
   <body> 
     <div class="container">
@@ -18,12 +18,12 @@
         <div class="top-box">
           <div class="worldwide">
             <h4 style="font-size: 30px;">Worldwide Data</h4>
-            <h4 id="worldwide-confirmed"></h4>
-            <h4 id="worldwide-active"></h4>
-            <h4 id="worldwide-critical"></h4>
-            <h4 id="worldwide-deaths"></h4>
-            <h4 id="worldwide-recovered"></h4>
-            <h4 id="worldwide-lastUpdated"></h4>
+            <h4 class="worldwide-data"id="worldwide-confirmed"></h4>
+            <h4 class="worldwide-data"id="worldwide-active"></h4>
+            <h4 class="worldwide-data"id="worldwide-critical"></h4>
+            <h4 class="worldwide-data"id="worldwide-deaths"></h4>
+            <h4 class="worldwide-data"id="worldwide-recovered"></h4>
+            <h4 class="worldwide-data"id="worldwide-lastUpdated"></h4>
           </div>
           <div class="countryInput">
             <h3 class="country-inp-title">Select A Country Below Or Search</h3>
@@ -49,12 +49,12 @@
           <div class="country">
             <div class="data">
               <h4 id="countryTitle" style="font-size: 30px;"></h4>
-              <h4 id="country-confirmed"></h4>
-              <h4 id="country-active"></h4>
-              <h4 id="country-critical"></h4>
-              <h4 id="country-deaths"></h4>
-              <h4 id="country-recovered"></h4>
-              <h4 id="country-lastUpdated"></h4>
+              <h4 class="country-data"></h4>
+              <h4 class="country-data"></h4>
+              <h4 class="country-data"></h4>
+              <h4 class="country-data"></h4>
+              <h4 class="country-data"></h4>
+              <h4 class="country-data"></h4>
             </div>
             <div class="flag-wrapper">
               <span id="flag"></span>
@@ -66,4 +66,5 @@
     </div>
   </body>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/maps.js"></script>
 </html>
