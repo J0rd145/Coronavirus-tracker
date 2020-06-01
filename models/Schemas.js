@@ -21,30 +21,30 @@ const TotalByCountry = mongoose.Schema({
     type: Number,
     required: true,
   },
+  activeCases: {
+    type: Number,
+    required: true,
+  },
   lastUpdate: {
     type: Date,
     required: false,
     default: new Date(),
   },
-  lat: {
+  latitude: {
     type: Number,
     required: true,
   },
-  lng: {
+  longitude: {
     type: Number,
     required: true,
   },
-  alpha2code: {
+  code: {
     type: String,
     required: true,
-  }
+  },
 });
 
 const totalWorldwide = mongoose.Schema({
-  _id: {
-    type: String,
-    required: true,
-  },
   confirmed: {
     type: Number,
     required: true,
