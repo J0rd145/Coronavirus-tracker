@@ -49,9 +49,7 @@ setInterval(() => {
 async function dbQuery(req, res, next) {
     req.country = await schema.TotalByCountry.findOne({ country: req.body.country })
     req.totals = await schema.TotalWorldwide.findOne()
-
     if (!req.country) return res.status(400).json({errmsg: `${req.body.country} Does Not Exist!`})
-    
     req.country = new Country(req.country)
     req.country.countryData = req.country.addCommas(new NumberData(req.country))
     req.totals = new Worldwide(req.totals).format()
