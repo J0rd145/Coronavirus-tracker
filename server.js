@@ -29,13 +29,13 @@ app.get("/", countryNames, (req, res) => {
 app.post("/getData", dbQuery, (req, res) => {
   return res.status(200).json({
     country: {
-      countryData: req.country.addCommas(new NumberData(req.country)),
+      countryData: req.country.countryData,
       latitude: req.country.latitude,
       longitude: req.country.longitude,
       code: req.country.code,
       country: req.country.country
     },
-    worldwide: req.totals.format()
+    worldwide: req.totals
   })
 })
 
@@ -53,7 +53,8 @@ async function dbQuery(req, res, next) {
     if (!req.country) return res.status(400).json({errmsg: `${req.body.country} Does Not Exist!`})
     
     req.country = new Country(req.country)
-    req.totals = new Worldwide(req.totals)
+    req.country.countryData = req.country.addCommas(new NumberData(req.country))
+    req.totals = new Worldwide(req.totals).format()
   next()
 }
 
