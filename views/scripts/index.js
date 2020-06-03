@@ -11,17 +11,31 @@ getData = async (country) => {
 };
 
 formatData = (country, totals) => {
-  document.title = `COVID-19 - ${country.country}`
-  document.getElementById("countryTitle").innerText = `${country.country} Coronavirus Information`;
+  localStorage.setItem("lastSearch", country.country)
+  displayCountryName(country.country)
   flagDisplay(country.code)
-  localStorageSet(country.country)
   moveMap(country.latitude, country.longitude)
-
-  const countryTab = Array.from(document.getElementsByClassName("country-data"))
-  const worldwideTab = Array.from(document.getElementsByClassName("worldwide-data"))
-  countryTab.forEach((i, index) =>  i.innerText = `${country.countryData[index].join(": ")}`)
-  worldwideTab.forEach((i, index) => i.innerText = `${totals[index].join(": ")}`)
+  country.countryData.forEach(i =>  displayData(i, document.getElementById("country")))
+  totals.forEach(i => displayData(i, document.getElementById("worldwide")))
 };
+
+function displayCountryName(countryName) {
+  const title = document.createElement("h4")
+  title.append(document.createTextNode(`${countryName} Coronavirus Information`))
+  document.title = `COVID-19 - ${countryName}`
+  title.id = "countryTitle"
+  document.getElementById("country").append(title)
+}
+
+function displayData(data, tab) {
+  tab.id === "country" ? className = "country-data" : className = "worldwide-data"
+  const newNode = document.createElement("h4")
+  data[0] === "activeCases" ? data[0] = "Active Cases" : null 
+  data[0] === "lastUpdated" ? data[0] = "Last Update" : null 
+  newNode.append(document.createTextNode(`${upperCase(data[0])}: ${data[1]}`))
+  newNode.classList = className
+  tab.append(newNode)
+}
 
 function moveMap(lat, lng) {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -29,6 +43,10 @@ function moveMap(lat, lng) {
     zoom: 4
   });
 };
+
+function upperCase(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1)
+}
 
 function formatInput(string) {
   if (string.length >= 4) return string.charAt(0).toUpperCase() + string.slice(1);
@@ -48,10 +66,6 @@ function flagDisplay(code) {
   if (!code || code == "err") return document.getElementById("flag").innerText = "No Flag To Display"
   document.getElementById("flag").innerText = null
   document.getElementById("flag").classList = `flag-icon-${code.toLowerCase()} flag-icon-background`
-}
-
-function localStorageSet(country) {
-  localStorage.setItem("lastSearch", country);
 }
 
 window.onload = () => {
