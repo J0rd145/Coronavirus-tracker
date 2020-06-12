@@ -1,63 +1,35 @@
 class Country {
   constructor(value) {
-    this.country = value.country,
-    this.confirmed = value.confirmed,
-    this.recovered = value.recovered,
-    this.critical = value.critical,
-    this.deaths = value.deaths,
-    this.activeCases = Math.floor(value.confirmed - value.recovered - value.deaths),
-    this.lastUpdate = value.lastUpdate,
-    this.latitude = value.latitude,
-    this.longitude = value.longitude,
-    this.code = value.code
-  }
-  addCommas(numberObject) {
-    const entries = Object.values(numberObject);
-    const keys = Object.keys(numberObject)  
-    const formattedNumbers = entries.map(i => addComma(i))
-    const result = keys.reduce((o, k, i) => ({...o, [k]: formattedNumbers[i]}), {})
-    result["lastUpdated"] = formatDate(result["lastUpdated"])
-    return Object.entries(result)
+    this.country = addCommas(value.country) || null,
+    this.confirmed = addCommas(value.confirmed) || null,
+    this.recovered = addCommas(value.recovered) || null,
+    this.critical = addCommas(value.critical) || null,
+    this.deaths = addCommas(value.deaths) || null,
+    this.activeCases = addCommas(Math.floor(value.confirmed - value.deaths)) || null,
+    this.lastUpdate = formatDate(value.lastUpdate) || null,
+    this.latitude = value.latitude || null,
+    this.longitude = value.longitude || null,
+    this.code = value.code || null
   }
 }
 
 class Worldwide {
   constructor(value) {
-    this.confirmed = value.confirmed;
-    this.activeCases = value.confirmed - value.recovered - value.deaths;
-    this.critical = value.critical;
-    this.deaths = value.deaths;
-    this.recovered = value.recovered;
-    this.lastUpdated = value.lastUpdate;
-  }
-  format() {
-    const entries = Object.values(this);
-    const keys = Object.keys(this)  
-    const formattedNumbers = entries.map(i => addComma(i))
-    const result = keys.reduce((o, k, i) => ({...o, [k]: formattedNumbers[i]}), {})
-    result["lastUpdated"] = formatDate(result["lastUpdated"])
-    return Object.entries(result)
-  }
-}
-
-class NumberData {
-  constructor(value) {
-    this.confirmed = value.confirmed,
-    this.recovered = value.recovered,
-    this.critical = value.critical,
-    this.deaths = value.deaths,
-    this.activeCases = value.activeCases
-    this.lastUpdated = value.lastUpdate
+    this.confirmed = addCommas(value.confirmed) || null;
+    this.activeCases = addCommas(Math.floor(value.confirmed - value.deaths)) || null,
+    this.critical = addCommas(value.critical) || null;
+    this.deaths = addCommas(value.deaths) || null;
+    this.recovered = addCommas(value.recovered) || null;
+    this.lastUpdate = formatDate(value.lastUpdate) || null;
   }
 }
 
 module.exports = {
   Country: Country,
   Worldwide: Worldwide,
-  NumberData: NumberData
 };
 
-function addComma(nStr) {
+function addCommas(nStr) {
   nStr += "";
   var x = nStr.split(".");
   var x1 = x[0];

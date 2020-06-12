@@ -10,41 +10,139 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/css/flag-icon.min.css"
     />
-    <title>COVID-19 Information</title>
+    <title>COVID-19 - <%= country.country %></title>
   </head>
-  <body> 
+  <body>
     <div class="container">
       <div class="main-body">
         <div class="top-box">
-          <div id="worldwide" class="worldwide">
-            <h4 style="font-size: 30px;">Worldwide Data</h4>
+          <div class="worldwide">
+            <h1 class="title-element">Worldwide</h1>
+            <abbr class="data" title="Total Confirmed Cases Worldwide"
+              >Confirmed: <%= !worldwide.confirmed ? "No Data Found" :
+              worldwide.confirmed %></abbr
+            >
+            <abbr class="data" title="Total Active (Confirmed Cases - Deaths) Cases Worldwide"
+              >Active Cases: <%= !worldwide.activeCases ? "No Data Found" :
+              worldwide.activeCases %></abbr
+            >
+            <abbr class="data" title="Total Recovered Worldwide"
+              >Recovered: <%= !worldwide.recovered ? "No Data Found" :
+              worldwide.recovered %></abbr
+            >
+            <abbr class="data" title="Total Deaths Worldwide"
+              >Deaths: <%= !worldwide.deaths ? "No Data Found" :
+              worldwide.deaths %></abbr
+            >
+            <abbr class="data" title="Total Critical Cases Worldwide"
+              >Critical: <%= !worldwide.critical ? "No Data Found" :
+              worldwide.critical %></abbr
+            >
+            <abbr
+              class="data"
+              title="When This Information Was Lasted Updated (UTC 0:00)"
+              >Last Updated: <%= !worldwide.lastUpdate ? "No Data Found" :
+              worldwide.lastUpdate %></abbr
+            >
           </div>
           <div class="countryInput">
-            <h3 class="country-inp-title">Select A Country Below Or Search</h3>
+            <h3 class="country-inp-title">
+              Select A Country To Find Coronavirus Information
+            </h3>
             <div class="country-selection">
-              <% countries.forEach(i => { %>
-                <h3 onclick="getData(this.innerText)" class="country-btn"><%= i %></h3>
-               <% }) %>
+              <% countryNames.forEach(i => { %>
+              <div onclick="clickSearch(this.innerText)" class="country-btn">
+                <% if (!i[1]) { %>
+                <div class="flag-wrapper-country-error">
+                  <h3>No Flag To Display - </h3>
+                </div>
+                <% } else { %>
+                <div class="flag-wrapper-country">
+                  <span
+                    class="flag-icon-<%= i[1].toLowerCase() %> flag-icon-background"
+                  ></span>
+                </div>
+                <% } %>
+                <h3><%= `${i[0]} - ${!i[1] ? "No Code" : i[1]}` %></h3>
+              </div>
+              <% }) %>
             </div>
-            <div class="inp-box">
+            <form
+              onsubmit="storeSearch(new FormData(this))"
+              class="inp-box"
+              id="country"
+              method="get"
+              action="/"
+            >
               <input
-              id="countryToGet"
-              class="inp"
-              placeholder="Search For A Country"
-              type="text"
+                class="inp"
+                required
+                type="text"
+                name="country"
+                placeholder="Search For A Country"
               />
-              <button onclick="getData(countryToGet.value)" class="btn">
+              <button type="submit" class="btn">
                 Search
               </button>
-            </div>
+            </form>
           </div>
         </div>
         <div class="bottom-box">
           <div class="country">
-            <div id="country" class="data"></div>
-            <div class="flag-wrapper">
-              <span id="flag"></span>
+            <div class="country-data">
+              <h4 class="title-element"><%= country.country %></h4>
+              <abbr
+                class="data"
+                title="Total Confirmed Cases In <%= country.country %>"
+                >Confirmed: <%= !country.confirmed ? "No Data Found" :
+                country.confirmed %></abbr
+              >
+              <abbr
+                class="data"
+                title="Total Active (Confirmed Cases - Deaths) Cases In <%= country.country %>"
+                >Active Cases: <%= !country.activeCases ? "No Data Found" :
+                country.activeCases %></abbr
+              >
+              <abbr
+                class="data"
+                title="Total Recovered Cases In <%= country.country %>"
+                >Recovered: <%= !country.recovered ? "No Data Found" :
+                country.recovered %></abbr
+              >
+              <abbr class="data" title="Total Deaths in <%= country.country %>"
+                >Deaths: <%= !country.deaths ? "No Data Found" : country.deaths
+                %></abbr
+              >
+              <abbr
+                class="data"
+                title="Total Critical Cases In <%= country.country %>"
+                >Critical: <%= !country.critical ? "No Data Found" :
+                country.critical %></abbr
+              >
+              <abbr
+                class="data"
+                title="The Time Information For <%= country.country %> Was Last Updated (UTC 0:00)"
+                >Last Updated: <%= !country.lastUpdate ? "No Data Found" :
+                country.lastUpdate %></abbr
+              >
+              <h4 style="display: none;" id="lat">
+                <%= !country.latitude ? undefined : country.latitude %>
+              </h4>
+              <h4 style="display: none;" id="lng">
+                <%= !country.longitude ? undefined : country.longitude %>
+              </h4>
             </div>
+            <% if (!country.code) { %>
+            <div class="flag-wrapper-error">
+              <h3>No Flag To Display</h3>
+            </div>
+            <% } else { %>
+            <div class="flag-wrapper">
+              <span
+                class="flag-icon-<%= country.code.toLowerCase() %> flag-icon-background"
+              ></span>
+            </div>
+            <% } %>
           </div>
           <div id="map"></div>
         </div>
@@ -52,5 +150,4 @@
     </div>
   </body>
   <script src="./scripts/index.js"></script>
-  <script src="./scripts/maps.js"></script>
 </html>
