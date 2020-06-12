@@ -1,32 +1,47 @@
 class Country {
   constructor(value) {
-    this.country = addCommas(value.country) || null,
-    this.confirmed = addCommas(value.confirmed) || null,
-    this.recovered = addCommas(value.recovered) || null,
-    this.critical = addCommas(value.critical) || null,
-    this.deaths = addCommas(value.deaths) || null,
-    this.activeCases = addCommas(Math.floor(value.confirmed - value.deaths)) || null,
-    this.lastUpdate = formatDate(value.lastUpdate) || null,
-    this.latitude = value.latitude || null,
-    this.longitude = value.longitude || null,
-    this.code = value.code || null
+    this.country = addCommas(value.country),
+    this.confirmed = addCommas(value.confirmed),
+    this.recovered = addCommas(value.recovered),
+    this.critical = addCommas(value.critical),
+    this.deaths = addCommas(value.deaths),
+    this.activeCases = addCommas(Math.floor(value.confirmed - value.deaths)),
+    this.lastUpdate = formatDate(value.lastUpdate),
+    this.latitude = value.latitude,
+    this.longitude = value.longitude,
+    this.code = value.code
   }
 }
 
 class Worldwide {
   constructor(value) {
-    this.confirmed = addCommas(value.confirmed) || null;
-    this.activeCases = addCommas(Math.floor(value.confirmed - value.deaths)) || null,
-    this.critical = addCommas(value.critical) || null;
-    this.deaths = addCommas(value.deaths) || null;
-    this.recovered = addCommas(value.recovered) || null;
-    this.lastUpdate = formatDate(value.lastUpdate) || null;
+    this.confirmed = addCommas(value.confirmed);
+    this.activeCases = addCommas(Math.floor(value.confirmed - value.deaths)),
+    this.critical = addCommas(value.critical);
+    this.deaths = addCommas(value.deaths);
+    this.recovered = addCommas(value.recovered);
+    this.lastUpdate = formatDate(value.lastUpdate);
+  }
+}
+
+class Unknown {
+  constructor() {
+    this.confirmed = null
+    this.activeCases = null
+    this.critical = null
+    this.deaths = null
+    this.recovered = null
+    this.lastUpdate = null
+    this.latitude = null,
+    this.longitude = null,
+    this.code = null
   }
 }
 
 module.exports = {
   Country: Country,
   Worldwide: Worldwide,
+  Unknown: Unknown,
 };
 
 function addCommas(nStr) {

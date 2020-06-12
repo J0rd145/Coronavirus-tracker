@@ -6,11 +6,53 @@
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/android-icon-192x192.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/css/flag-icon.min.css"
     />
-    <title>COVID-19 - <%= country.country %></title>
+    <title><%= country.country %></title>
   </head>
   <body>
     <div class="container">
@@ -22,7 +64,9 @@
               >Confirmed: <%= !worldwide.confirmed ? "No Data Found" :
               worldwide.confirmed %></abbr
             >
-            <abbr class="data" title="Total Active (Confirmed Cases - Deaths) Cases Worldwide"
+            <abbr
+              class="data"
+              title="Total Active (Confirmed Cases - Deaths) Cases Worldwide"
               >Active Cases: <%= !worldwide.activeCases ? "No Data Found" :
               worldwide.activeCases %></abbr
             >
@@ -54,7 +98,7 @@
               <div onclick="clickSearch(this.innerText)" class="country-btn">
                 <% if (!i[1]) { %>
                 <div class="flag-wrapper-country-error">
-                  <h3>No Flag To Display - </h3>
+                  <h3>No Flag To Display -</h3>
                 </div>
                 <% } else { %>
                 <div class="flag-wrapper-country">
@@ -90,7 +134,9 @@
         <div class="bottom-box">
           <div class="country">
             <div class="country-data">
-              <h4 class="title-element"><%= country.country %></h4>
+              <h4 class="title-element">
+                <%= !country.country ? "Unknown" : country.country %>
+              </h4>
               <abbr
                 class="data"
                 title="Total Confirmed Cases In <%= country.country %>"
@@ -126,10 +172,10 @@
                 country.lastUpdate %></abbr
               >
               <h4 style="display: none;" id="lat">
-                <%= !country.latitude ? undefined : country.latitude %>
+                <%= country.latitude %>
               </h4>
               <h4 style="display: none;" id="lng">
-                <%= !country.longitude ? undefined : country.longitude %>
+                <%= country.longitude %>
               </h4>
             </div>
             <% if (!country.code) { %>

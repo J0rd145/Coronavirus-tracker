@@ -5,11 +5,10 @@ script.async = true;
 
 window.initMap = function() {
   [lat, lng] = [
-    document.getElementById("lat").innerText,
-    document.getElementById("lng").innerText 
+    document.getElementById("lat"),
+    document.getElementById("lng") 
   ]
-  !lng ? lng = 75.073 : lng = parseFloat(lng)
-  !lat ? lat = 75.073 : lat = parseFloat(lat)
+  [lat, lng] = [...validateLatLng(lat.innerText, lng.innerText)]
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: lat, lng: lng},
     zoom: 4
@@ -28,4 +27,10 @@ function clickSearch(country) {
   country.split(" " + "-")[0] == "No Flag To Display" ? searchValue = country.split(" " + "-")[1] : searchValue = country.split(" " + "-")[0]
   inputfield.value = searchValue
   form.submit()
+}
+
+function validateLatLng(lat, lng) {
+  !lat ? lat = 55.3781 : lat = parseFloat(lat)
+  !lng ? lng = 3.4360 : lng = parseFloat(lng)
+  return [lat, lng]
 }
