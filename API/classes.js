@@ -59,5 +59,5 @@ function addCommas(nStr) {
 function formatDate(date) {
   temp = Date(date);
   const unformattedDate = temp.split(" ");
-  return `${unformattedDate[0]}, ${unformattedDate[2]} ${unformattedDate[1]} ${unformattedDate[3]} at ${unformattedDate[4]}`;
+  return `${unformattedDate[0]}, ${unformattedDate[2]} ${unformattedDate[1]} ${unformattedDate[3]}`;
 }

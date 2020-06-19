@@ -3,8 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/index.css" />
     <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Roboto&amp;lang=en"
+    />
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Roboto+Mono&amp;lang=en"
+    />
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
@@ -56,136 +64,73 @@
   </head>
   <body>
     <div class="container">
-      <div class="main-body">
-        <div class="top-box">
-          <div class="worldwide">
-            <h1 class="title-element">Worldwide</h1>
-            <abbr class="data" title="Total Confirmed Cases Worldwide"
-              >Confirmed: <%= !worldwide.confirmed ? "No Data Found" :
-              worldwide.confirmed %></abbr
-            >
-            <abbr
-              class="data"
-              title="Total Active (Confirmed Cases - Deaths) Cases Worldwide"
-              >Active Cases: <%= !worldwide.activeCases ? "No Data Found" :
-              worldwide.activeCases %></abbr
-            >
-            <abbr class="data" title="Total Recovered Worldwide"
-              >Recovered: <%= !worldwide.recovered ? "No Data Found" :
-              worldwide.recovered %></abbr
-            >
-            <abbr class="data" title="Total Deaths Worldwide"
-              >Deaths: <%= !worldwide.deaths ? "No Data Found" :
-              worldwide.deaths %></abbr
-            >
-            <abbr class="data" title="Total Critical Cases Worldwide"
-              >Critical: <%= !worldwide.critical ? "No Data Found" :
-              worldwide.critical %></abbr
-            >
-            <abbr
-              class="data"
-              title="When This Information Was Lasted Updated (UTC 0:00)"
-              >Last Updated: <%= !worldwide.lastUpdate ? "No Data Found" :
-              worldwide.lastUpdate %></abbr
-            >
-          </div>
-          <div class="countryInput">
-            <h3 class="country-inp-title">
-              Select A Country To Find Coronavirus Information
-            </h3>
-            <div class="country-selection">
-              <% countryNames.forEach(i => { %>
-              <div onclick="clickSearch(this.innerText.split('-')[0])" class="country-btn">
-                <% if (i[1]) { %>
-                <div class="flag-wrapper-country">
-                  <span
-                    class="flag-icon-<%= i[1].toLowerCase() %> flag-icon-background"
-                  ></span>
-                </div>
-                <% } %>
-                <h3><%= `${i[0]} - ${!i[1] ? "No Code" : i[1]}` %></h3>
-              </div>
-              <% }) %>
-            </div>
-            <form
-              onsubmit="storeSearch(new FormData(this))"
-              class="inp-box"
-              id="country"
-              method="get"
-              action="/"
-            >
-              <input
-                class="inp"
-                required
-                type="text"
-                name="country"
-                placeholder="Search For A Country"
-              />
-              <button type="submit" class="btn">
-                Search
-              </button>
-            </form>
-          </div>
+      <header class="title">
+        <h3 class="covid-header">C<i class="fas fa-virus virus"></i>VID-19</h3>
+        <h4 class="covid-subtitle">Latest Coronavirus Data</h4>
+      </header>
+      <div class="country">
+        <h1 class="country-name"><%= country.country %></h1>
+        <% if (country.code) { %>
+        <span
+          class="flag flag-icon-background flag-icon-<%= country.code.toLowerCase() %>"
+        ></span>
+        <% } else { %>
+        <span class="flag">No Flag To Display</span>
+        <% } %>
+      </div>
+      <div class="results">
+        <div class="data">
+          <h4 class="data-title">Confirmed</h4>
+          <p class="number-data"><%= country.confirmed %></p>
+          <p class="data-date"><%= country.lastUpdate %></p>
+          <p class="data-description">Number of confirmed COVID-19 cases</p>
         </div>
-        <div class="bottom-box">
-          <div class="country">
-            <div class="country-data">
-              <h4 class="title-element">
-                <%= !country.country ? "Unknown" : country.country %>
-              </h4>
-              <abbr
-                class="data"
-                title="Total Confirmed Cases In <%= country.country %>"
-                >Confirmed: <%= !country.confirmed ? "No Data Found" :
-                country.confirmed %></abbr
-              >
-              <abbr
-                class="data"
-                title="Total Active (Confirmed Cases - Deaths) Cases In <%= country.country %>"
-                >Active Cases: <%= !country.activeCases ? "No Data Found" :
-                country.activeCases %></abbr
-              >
-              <abbr
-                class="data"
-                title="Total Recovered Cases In <%= country.country %>"
-                >Recovered: <%= !country.recovered ? "No Data Found" :
-                country.recovered %></abbr
-              >
-              <abbr class="data" title="Total Deaths in <%= country.country %>"
-                >Deaths: <%= !country.deaths ? "No Data Found" : country.deaths
-                %></abbr
-              >
-              <abbr
-                class="data"
-                title="Total Critical Cases In <%= country.country %>"
-                >Critical: <%= !country.critical ? "No Data Found" :
-                country.critical %></abbr
-              >
-              <abbr
-                class="data"
-                title="The Time Information For <%= country.country %> Was Last Updated (UTC 0:00)"
-                >Last Updated: <%= !country.lastUpdate ? "No Data Found" :
-                country.lastUpdate %></abbr
-              >
-              <h4 style="display: none;" id="lat">
-                <%= country.latitude %>
-              </h4>
-              <h4 style="display: none;" id="lng">
-                <%= country.longitude %>
-              </h4>
-            </div>
-            <% if (country.code) { %>
-            <div class="flag-wrapper">
-              <span
-                class="flag-icon-<%= country.code.toLowerCase() %> flag-icon-background"
-              ></span>
-            </div>
-            <% } %>
-          </div>
-          <div id="map"></div>
+        <div class="data">
+          <h4 class="data-title">Deaths</h4>
+          <p class="number-data"><%= country.deaths %></p>
+          <p class="data-date"><%= country.lastUpdate %></p>
+          <p class="data-description">Number of deaths caused by COVID-19</p>
+        </div>
+        <div class="data">
+          <h4 class="data-title">Recovered</h4>
+          <p class="number-data"><%= country.recovered %></p>
+          <p class="data-date"><%= country.lastUpdate %></p>
+          <p class="data-description">Number of recovered COVID-19 cases</p>
+        </div>
+        <div class="data">
+          <h4 class="data-title">Active Cases</h4>
+          <p class="number-data"><%= country.activeCases %></p>
+          <p class="data-date"><%= country.lastUpdate %></p>
+          <p class="data-description">Number of active cases COVID-19 cases</p>
         </div>
       </div>
+      <div class="selection-area">
+        <select onChange="search()" class="countries">
+          <option>Global</option
+          ><option> <% for( let name in countryNames ) { %> </option
+
+          ><option><%= countryNames[name] %></option
+          ><option>
+            <% } %>
+          </option></select
+        >
+      </div>
+      <div class="chart">
+        <canvas id="myChart" width="50" height="11"></canvas>
+      </div>
+      <form
+        id="form"
+        name="country"
+        style="visibility: hidden;"
+        action="/"
+        method="get"
+      ></form>
     </div>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <script src="./scripts/index.js"></script>
+  <script
+    src="https://kit.fontawesome.com/ce521607a0.js"
+    crossorigin="anonymous"
+  ></script>
 </html>

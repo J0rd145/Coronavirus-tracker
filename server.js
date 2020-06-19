@@ -20,21 +20,15 @@ app.get("/", getData, (req, res) => {
 
 async function getData(req, res, next) {
   const lastSearch = validateCookie(req.headers.cookie)
-  const searchCountry = formatQueryString(req.query.country)
+  const searchCountry = req.query.country
   const search = validateSearch(searchCountry, lastSearch)
   const allData = await Promise.all([
     country(search),
     worldwide(),
     countryNames(),
   ]);
-  [req.country, req.worldwide, req.countryNames] = [...validateData(allData)] 
+  [req.country, req.worldwide, req.countryNames] = validateData(allData)
   next();
-}
-
-function formatQueryString(string) {
-  if (!string) return false
-  if (string.length >= 4) return string.charAt(0).toUpperCase() + string.slice(1);
-  return string.toUpperCase();
 }
 
 function validateSearch(country, lastSearch) {
@@ -51,7 +45,7 @@ function validateCookie(cookie) {
 function validateData(data) {
   !data[0] ? countryData = new Unknown(data[0]) : countryData = new Country(data[0])
   !data[1] ? worldwideData = undefined : worldwideData = new Worldwide(data[1]);
-  !data[2] ? countrynames = undefined : countrynames = data[2].map((i) => [i.country, i.code]).sort();
+  !data[2] ? countrynames = undefined : countrynames = data[2].map((i) => [i.country]).sort();
   return [countryData, worldwideData, countrynames]
 }
 
