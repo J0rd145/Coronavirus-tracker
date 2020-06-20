@@ -122,8 +122,8 @@ body {
 
 .country-name {
   margin: 5px;
-  color: whitesmoke;
   font-size: 50px;
+  color: whitesmoke;
   padding-right: 20px;
   font-family: 'Roboto Mono';
   border-right: 2px solid #cfcfcf;
@@ -143,6 +143,8 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  color: white;
+  font-size: 20px;
   width: 100px;
   height: 100px;
   margin-left: 10px;

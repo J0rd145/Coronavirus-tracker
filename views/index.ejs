@@ -74,13 +74,13 @@
       </header>
       <div class="country">
         <h1 class="country-name"><%= country.country %></h1>
-        <% if (country.code) { %>
-        <span
-          class="flag flag-icon-background flag-icon-<%= country.code.toLowerCase() %>"
-        ></span>
-        <% } else { %>
-        <span class="flag">No Flag To Display</span>
-        <% } %>
+          <% if (country.code) { %>
+            <span
+            class="flag flag-icon-background flag-icon-<%= country.code.toLowerCase() %>"
+            ></span>
+            <% } else { %>
+              <span class="flag">No Flag To Display</span>
+              <% } %>
       </div>
       <div class="results">
         <div class="data">
