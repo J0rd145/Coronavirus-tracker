@@ -17,6 +17,10 @@ app.get("/", getData, (req, res) => {
   });
 });
 
+app.get("/history-for", getHistory, (req, res) => {
+
+})
+
 async function getData(req, res, next) {
   const lastSearch = validateCookie(req.headers.cookie)
   const search = validateSearch(req.query.country, lastSearch)
@@ -28,6 +32,10 @@ async function getData(req, res, next) {
   }
   [req.countryData, req.countryNames] = [...validateData(allData)]
   next()
+}
+
+async function getHistory(req, res, next) {
+  console.log(req.query.country)
 }
 
 function validateSearch(country, lastSearch) {
