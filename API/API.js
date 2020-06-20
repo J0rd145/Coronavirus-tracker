@@ -12,7 +12,12 @@ async function worldwide() {
     });
     req.end(async (res) => {
       if (res.error) return reject(res.error);
-      return resolve(res.body[0]);
+      const additions = {
+        country: "Global",
+        code: "ww"
+      }
+      const worldwide = { ...additions, ...res.body[0] }
+      return resolve(worldwide);
     });
   });
 }
@@ -58,3 +63,5 @@ module.exports = {
     worldwide: worldwide,
     countryNames: countryNames
 }
+
+worldwide()

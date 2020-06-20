@@ -104,7 +104,10 @@
       </div>
       <div class="selection-area">
         <select onChange="search()" class="countries">
-          <option>Global</option> 
+          <option><%= country.country %></option>
+          <% if (country.country != "Global") { %>
+            <option>Global</option>
+          <% } %> 
             <% for ( let name in countryNames ) { %> 
               <option><%= countryNames[name] %></option>
             <% } %>

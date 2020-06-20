@@ -1,4 +1,4 @@
-class Country {
+class Data {
   constructor(value) {
     this.country = addCommas(value.country),
     this.confirmed = addCommas(value.confirmed),
@@ -6,22 +6,9 @@ class Country {
     this.critical = addCommas(value.critical),
     this.deaths = addCommas(value.deaths),
     this.lastUpdate = formatDate(value.lastUpdate),
-    this.latitude = value.latitude,
-    this.longitude = value.longitude,
     this.code = value.code
   }
 }
-
-class Worldwide {
-  constructor(value) {
-    this.confirmed = addCommas(value.confirmed);
-    this.critical = addCommas(value.critical);
-    this.deaths = addCommas(value.deaths);
-    this.recovered = addCommas(value.recovered);
-    this.lastUpdate = formatDate(value.lastUpdate);
-  }
-}
-
 class Unknown {
   constructor() {
     this.confirmed = null
@@ -29,15 +16,12 @@ class Unknown {
     this.deaths = null
     this.recovered = null
     this.lastUpdate = null
-    this.latitude = null,
-    this.longitude = null,
     this.code = null
   }
 }
 
 module.exports = {
-  Country: Country,
-  Worldwide: Worldwide,
+  Data: Data,
   Unknown: Unknown,
 };
 

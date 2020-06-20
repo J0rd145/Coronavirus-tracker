@@ -250,4 +250,11 @@ body {
 .chart {
   width: 100%;
 }
+
+.flag-icon-ww {
+  background-image: url("../../images/globe.svg");
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
 /*# sourceMappingURL=index.css.map */
