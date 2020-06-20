@@ -1,0 +1,148 @@
+@mixin flex ($direction, $alignment, $justifcation)
+  display: flex
+  flex-direction: $direction
+  align-items: $alignment
+  justify-content: $justifcation
+    
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    font-family: 'Roboto', sans-serif
+
+body
+    text-align: center
+    height: 100vh
+    width: 100vw
+
+.container
+    @include flex (column, center, center)
+    width: 100%
+    height: 100%
+
+.styles
+    @include flex (row, center, center)
+    top: 50px
+    right: 50px
+    padding: 5px
+    color: grey
+    position: absolute
+
+.style-btn 
+    position: relative
+    appearance: none
+    margin-left: 10px  
+    outline: none
+    width: 50px
+    height: 30px
+    background-color: #ffffff 
+    border: 1px solid #D9DADC
+    border-radius: 50px 
+    box-shadow: inset -20px 0 0 0 #ffffff
+    transition-duration: 200ms
+    &::after
+        content: ""
+        position: absolute
+        top: 1px
+        left: 1px
+        width: 26px
+        height: 26px
+        background-color: transparent
+        border-radius: 50% 
+        box-shadow: 2px 4px 6px rgba(0,0,0,0.2)
+    &:checked
+        border-color: #4ED164
+        box-shadow: inset 20px 0 0 0 #4ED164
+        &:after
+            left: 20px
+            box-shadow: -2px 4px 3px rgba(0,0,0,0.05)
+.title
+    width: 100%
+    margin: auto
+
+.country
+    width: 100%
+    margin-bottom: 20px
+    @include flex (row, center, center)
+
+.country-name
+    margin: 5px
+    color: #4d4d4d
+    font-size: 50px
+    padding-right: 20px
+    font-family: 'Roboto Mono'
+    border-right: 2px solid #cfcfcf
+
+.flag
+    @include flex (column, center, center)
+    width: 100px
+    height: 100px
+    margin-left: 10px
+
+.covid-header
+    font-size: 40px
+    letter-spacing: 2px
+    font-family: 'Roboto Mono'
+
+.virus
+    color: #1aa826
+
+.covid-subtitle
+    font-size: 20px
+    font-family: 'Roboto Mono'
+
+.results
+    @include flex (row, center, space-evenly)
+    width: 100%
+    margin: 20px auto
+
+.data
+    padding: 20px
+    text-align: left
+    border-radius: 5px
+    box-shadow: 2px 0 4px #eee, -1px -1px #eee
+    &:nth-child(1)
+        border-bottom: 5px solid #4288f0
+    &:nth-child(2)
+        border-bottom: 5px solid #ee2b2b
+    &:nth-child(3)
+        border-bottom: 5px solid #1aa826
+    &:nth-child(4)
+        border-bottom: 5px solid #a242f0
+
+.data-title
+    color: grey
+    margin: 5px 0 10px auto
+    font-family: 'Roboto Mono'
+
+.number-data
+    font-size: 20px
+    margin: 5px auto
+
+.data-date
+    color: grey
+    margin: 5px auto
+    font-size: 15px
+
+.data-description
+    font-size: 17px
+    margin-top: 5px
+
+.selection-area
+    width: 100%
+
+.countries
+    width: 50%
+    border: none
+    cursor: pointer
+    margin: 20px auto
+    padding: 10px 0 5px 5px
+    transition: 150ms all ease-in-out
+    border-bottom: 2px solid #5381c5
+    &:focus
+        outline: none
+    &:hover
+        border-bottom: 2px solid #256fdd
+
+.chart
+    width: 100%

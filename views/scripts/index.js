@@ -12,46 +12,6 @@
 //   });
 // };
 // document.head.appendChild(script);
-
-window.onload = () => {
-  const ctx = document.getElementById('myChart').getContext('2d');
-  const myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: false
-          }
-        }]
-      }
-    }
-  });
-}
   
   function storeSearch(clickCountry) {
     document.cookie = `lastSearch = ${clickCountry}; expires=Sun, 1 Jan 2040 12:00:00 UTC`
@@ -66,8 +26,47 @@ function search() {
   form.submit()
 }
 
-// function validateLatLng(lat, lng) {
-//   !lat ? lat = 55.3781 : lat = parseFloat(lat)
-//   !lng ? lng = 3.4360 : lng = parseFloat(lng)
-//   return [lat, lng]
-// }
+function changeCSS() {
+  const oldlink = document.getElementsByTagName("link").item(0);
+
+  const [cssFile, newMoon] = cssFileValidation(oldlink)
+
+  const newlink = document.createElement("link");
+
+  newlink.setAttribute("rel", "stylesheet");
+  newlink.setAttribute("type", "text/css");
+  newlink.setAttribute("href", cssFile);
+
+  storeCssPrefs(cssFile)
+
+  document.getElementById("moon").classList = newMoon
+  document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
+}
+
+function cssFileValidation(currentFile) {
+  if (currentFile.href == "http://localhost:7000/css/dark/index.css") {
+    return ["http://localhost:7000/css/light/index.css", "far fa-moon"]
+  } else {
+    return ["http://localhost:7000/css/dark/index.css", "fas fa-moon"]
+  }
+}
+
+function storeCssPrefs(change) {
+  if (change == "http://localhost:7000/css/dark/index.css") {
+    localStorage.setItem("style", "dark")
+  } else {
+    localStorage.setItem("style", "light")
+  }
+}
+
+function checkCssPrefs() {
+  const checkbox = document.getElementById("dark-light")
+  const prefs = localStorage.getItem("style")
+  if (prefs == "dark") {
+    checkbox.checked = true
+    return true
+  } 
+  return false
+}
+
+window.onload = checkCssPrefs() ? changeCSS() : null

@@ -5,7 +5,6 @@ class Country {
     this.recovered = addCommas(value.recovered),
     this.critical = addCommas(value.critical),
     this.deaths = addCommas(value.deaths),
-    this.activeCases = addCommas(Math.floor(value.confirmed - value.deaths)),
     this.lastUpdate = formatDate(value.lastUpdate),
     this.latitude = value.latitude,
     this.longitude = value.longitude,
@@ -16,7 +15,6 @@ class Country {
 class Worldwide {
   constructor(value) {
     this.confirmed = addCommas(value.confirmed);
-    this.activeCases = addCommas(Math.floor(value.confirmed - value.deaths)),
     this.critical = addCommas(value.critical);
     this.deaths = addCommas(value.deaths);
     this.recovered = addCommas(value.recovered);
@@ -27,7 +25,6 @@ class Worldwide {
 class Unknown {
   constructor() {
     this.confirmed = null
-    this.activeCases = null
     this.critical = null
     this.deaths = null
     this.recovered = null

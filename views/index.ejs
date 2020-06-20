@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/light/index.css" />
     <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
     <link
       rel="stylesheet"
@@ -64,6 +64,10 @@
   </head>
   <body>
     <div class="container">
+      <div class="styles">
+        <label for="dark/light">Dark Mode <i id="moon" class="far fa-moon"></i></label>
+        <input id="dark-light" onChange="changeCSS()" class="style-btn" type="checkbox"></input>
+      </div>
       <header class="title">
         <h3 class="covid-header">C<i class="fas fa-virus virus"></i>VID-19</h3>
         <h4 class="covid-subtitle">Latest Coronavirus Data</h4>
@@ -81,39 +85,30 @@
       <div class="results">
         <div class="data">
           <h4 class="data-title">Confirmed</h4>
-          <p class="number-data"><%= country.confirmed %></p>
-          <p class="data-date"><%= country.lastUpdate %></p>
+          <p class="number-data"><%= !country.confirmed ? "No Data" : country.confirmed %></p>
+          <p class="data-date"><%= !country.lastUpdate ? "No Data" : country.lastUpdate %></p>
           <p class="data-description">Number of confirmed COVID-19 cases</p>
         </div>
         <div class="data">
           <h4 class="data-title">Deaths</h4>
-          <p class="number-data"><%= country.deaths %></p>
-          <p class="data-date"><%= country.lastUpdate %></p>
+          <p class="number-data"><%= !country.deaths ? "No Data" : country.deaths %></p>
+          <p class="data-date"><%= !country.lastUpdate ? "No Data" : country.lastUpdate %></p>
           <p class="data-description">Number of deaths caused by COVID-19</p>
         </div>
         <div class="data">
           <h4 class="data-title">Recovered</h4>
-          <p class="number-data"><%= country.recovered %></p>
-          <p class="data-date"><%= country.lastUpdate %></p>
+          <p class="number-data"><%= !country.recovered ? "No Data" : country.recovered %></p>
+          <p class="data-date"><%= !country.lastUpdate ? "No Data" : country.lastUpdate %></p>
           <p class="data-description">Number of recovered COVID-19 cases</p>
-        </div>
-        <div class="data">
-          <h4 class="data-title">Active Cases</h4>
-          <p class="number-data"><%= country.activeCases %></p>
-          <p class="data-date"><%= country.lastUpdate %></p>
-          <p class="data-description">Number of active cases COVID-19 cases</p>
         </div>
       </div>
       <div class="selection-area">
         <select onChange="search()" class="countries">
-          <option>Global</option
-          ><option> <% for( let name in countryNames ) { %> </option
-
-          ><option><%= countryNames[name] %></option
-          ><option>
+          <option>Global</option> 
+            <% for ( let name in countryNames ) { %> 
+              <option><%= countryNames[name] %></option>
             <% } %>
-          </option></select
-        >
+        </select>
       </div>
       <div class="chart">
         <canvas id="myChart" width="50" height="11"></canvas>
@@ -129,6 +124,7 @@
   </body>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/chart.js"></script>
   <script
     src="https://kit.fontawesome.com/ce521607a0.js"
     crossorigin="anonymous"
