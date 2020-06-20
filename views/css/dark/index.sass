@@ -135,22 +135,25 @@ body
     margin-top: 5px
 
 .selection-area
-    width: 100%
+    @include flex (column, center, center)
+    width: 50%
+    margin: 20px auto
+
+.select-label
+    color: whitesmoke
+    align-self: start
+    font-family: 'Roboto Mono'
 
 .countries
-    width: 50%
+    width: 100%
     border: none
     cursor: pointer
-    margin: 20px auto
     color: whitesmoke
     padding: 10px 0 5px 5px
-    background-color: transparent
-    transition: 150ms all ease-in-out
+    background: transparent
     border-bottom: 2px solid #5381c5
     &:focus
         outline: none
-    &:hover
-        border-bottom: 2px solid #256fdd
 
 option
     color: white 
