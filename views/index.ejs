@@ -75,12 +75,15 @@
       <div class="country">
         <h1 class="country-name"><%= country.country %></h1>
           <% if (country.code) { %>
-            <span
-            class="flag flag-icon-background flag-icon-<%= country.code.toLowerCase() %>"
-            ></span>
-            <% } else { %>
-              <span class="flag">No Flag To Display</span>
-              <% } %>
+          <span
+          class="flag flag-icon-background flag-icon-<%= country.code.toLowerCase() %>"></span>
+          <% } else if (country.country == "Diamond Princess" || country.country == "MS Zaandam") { %>
+            <span class="flag flag-icon-background flag-icon-aa"></span>
+          <% } else if (country.country == "Channel Islands") { %>
+            <span class="flag flag-icon-background flag-icon-kl"></span>
+          <% } else if (country.country == "Kosovo* (disputed teritory)") { %>
+            <span class="flag flag-icon-background flag-icon-XK"></span>
+          <% } %>
       </div>
       <div class="results">
         <div class="data">
