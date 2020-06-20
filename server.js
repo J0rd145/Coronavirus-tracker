@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 7000;
-const { Data, Unknown } = require("./API/classes");
+const { Data, Unknown, ChartData } = require("./API/classes");
 const { country, worldwide, countryNames } = require("./API/API");
 
 app.use(express.json());
@@ -35,7 +35,11 @@ async function getData(req, res, next) {
 }
 
 async function getHistory(req, res, next) {
-  console.log(req.query.country)
+  const searchCountry = req.query.country
+  countryData = await country(searchCountry)
+  if (!countryData) return res.status(400).json({ errmsg: "No Data Found" })
+  const formattedData = validateChartData(countryData)
+  return res.status(200).json({ country: formattedData })
 }
 
 function validateSearch(country, lastSearch) {
@@ -48,6 +52,11 @@ function validateCookie(cookie) {
   !cookie ? result = null : result = cookie.split("=")[1]
   return result
 }
+
+function validateChartData(data) {
+  !data ? countryData = new Unknown(data) : countryData = new ChartData(data)
+  return countryData 
+  }
 
 function validateData(data) {
   !data[0] ? countryData = new Unknown(data[0]) : countryData = new Data(data[0])

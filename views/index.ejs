@@ -104,6 +104,12 @@
           <p class="data-date"><%= !country.lastUpdate ? "No Data" : country.lastUpdate %></p>
           <p class="data-description">Number of recovered COVID-19 cases</p>
         </div>
+        <div class="data">
+          <h4 class="data-title">Critical</h4>
+          <p class="number-data"><%= !country.critical ? "No Data" : country.critical %></p>
+          <p class="data-date"><%= !country.lastUpdate ? "No Data" : country.lastUpdate %></p>
+          <p class="data-description">Number of critical COVID-19 cases</p>
+        </div>
       </div>
       <div class="selection-area">
         <label class="select-label" for="selection">Select A Country</label>

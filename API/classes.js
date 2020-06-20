@@ -9,6 +9,16 @@ class Data {
     this.code = value.code
   }
 }
+class ChartData {
+  constructor(value) {
+    this.country = value.country,
+    this.confirmed = value.confirmed,
+    this.recovered = value.recovered,
+    this.critical = value.critical,
+    this.deaths = value.deaths
+  }
+}
+
 class Unknown {
   constructor() {
     this.confirmed = null
@@ -22,6 +32,7 @@ class Unknown {
 
 module.exports = {
   Data: Data,
+  ChartData: ChartData,
   Unknown: Unknown,
 };
 
