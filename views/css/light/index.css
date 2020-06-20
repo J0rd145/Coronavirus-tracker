@@ -63,8 +63,12 @@ body {
   border-radius: 50px;
   -webkit-box-shadow: inset -20px 0 0 0 #ffffff;
           box-shadow: inset -20px 0 0 0 #ffffff;
-  -webkit-transition-duration: 200ms;
-          transition-duration: 200ms;
+  -webkit-transition: -webkit-box-shadow 200ms ease-in-out;
+  transition: -webkit-box-shadow 200ms ease-in-out;
+  transition: box-shadow 200ms ease-in-out;
+  transition: box-shadow 200ms ease-in-out, -webkit-box-shadow 200ms ease-in-out;
+  -webkit-transition: border-color 200ms ease-in-out;
+  transition: border-color 200ms ease-in-out;
 }
 
 .style-btn::after {
