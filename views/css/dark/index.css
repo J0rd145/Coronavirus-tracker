@@ -31,6 +31,41 @@ body {
   position: absolute;
 }
 
+#moon {
+  -webkit-animation: spin 400ms normal ease-in-out;
+          animation: spin 400ms normal ease-in-out;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(-160deg);
+            transform: rotate(-160deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(-160deg);
+            transform: rotate(-160deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+
 .style-btn {
   position: relative;
   -webkit-appearance: none;

@@ -26,6 +26,17 @@ body
     color: grey
     position: absolute
 
+#moon
+    animation: spin 400ms normal ease-in-out 
+
+@keyframes spin
+    0% 
+        transform: rotate(0deg)
+    50% 
+        transform: rotate(160deg)
+    100% 
+        transform: rotate(360deg)
+
 .style-btn 
     position: relative
     appearance: none
