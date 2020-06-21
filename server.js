@@ -18,8 +18,22 @@ app.get("/", getData, (req, res) => {
 });
 
 app.get("/history-for", getHistory, (req, res) => {
-
+  return res.status(200).json({ country: req.chartData })
 })
+
+
+app.get("/latlngfor", getLatLng, (req, res) => {
+  return res.status(200).json({ LatLng: req.LatLng })
+})
+
+async function getLatLng(req, res, next) {
+  const searchCountry = req.query.country
+  const countryData = await country(searchCountry) 
+  if (!countryData) return res.status(400).json({ errmsg: "No Data Found" })
+  const formattedData = validateLatLng(countryData)
+  req.LatLng = formattedData
+  next()
+}
 
 async function getData(req, res, next) {
   const lastSearch = validateCookie(req.headers.cookie)
@@ -36,10 +50,11 @@ async function getData(req, res, next) {
 
 async function getHistory(req, res, next) {
   const searchCountry = req.query.country
-  countryData = await country(searchCountry)
+  searchCountry != "Global" ? countryData = await country(searchCountry) : countryData = await worldwide()
   if (!countryData) return res.status(400).json({ errmsg: "No Data Found" })
   const formattedData = validateChartData(countryData)
-  return res.status(200).json({ country: formattedData })
+  req.chartData = formattedData
+  next()
 }
 
 function validateSearch(country, lastSearch) {
@@ -57,6 +72,11 @@ function validateChartData(data) {
   !data ? countryData = new Unknown(data) : countryData = new ChartData(data)
   return countryData 
   }
+
+function validateLatLng(data) {
+  if (!data) return [null, null]
+  return [data.latitude, data.longitude]
+}
 
 function validateData(data) {
   !data[0] ? countryData = new Unknown(data[0]) : countryData = new Data(data[0])

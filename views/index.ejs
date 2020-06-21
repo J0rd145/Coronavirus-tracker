@@ -123,10 +123,15 @@
             <% } %>
         </select>
       </div>
-      <div class="chart">
-        <canvas id="myChart" width="50" height="11"></canvas>
+      <div class="bottom-row">
+        <div class="chart">
+          <canvas id="myChart" width="50" height="29"></canvas>
+        </div>
+        <div class="map">
+          <div id="map"></div>
+        </div>
       </div>
-      <form
+        <form
         id="form"
         name="country"
         style="visibility: hidden;"
@@ -138,6 +143,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <script src="./scripts/index.js"></script>
   <script src="./scripts/chart.js"></script>
+  <script src="./scripts/map.js"></script>
   <script
     src="https://kit.fontawesome.com/ce521607a0.js"
     crossorigin="anonymous"

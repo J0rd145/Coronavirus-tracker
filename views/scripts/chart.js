@@ -40,7 +40,7 @@ function getData() {
   const country = document.getElementById("country-name").innerText
   fetch(`http://localhost:7000/history-for?country=${country}`)
   .then(res => res.json())
-  .then(data => data ? genGraph(data) : genGraph()) 
+  .then(data => data.errmsg ? genGraph() : genGraph(data)) 
 }
 
 
