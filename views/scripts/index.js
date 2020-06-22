@@ -55,3 +55,4 @@ function checkCssPrefs() {
 }
 
 window.onload = checkCssPrefs() ? changeCSS() : null;
+
