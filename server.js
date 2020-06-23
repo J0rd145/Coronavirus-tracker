@@ -75,7 +75,7 @@ function validateChartData(data) {
 
 function validateLatLng(data) {
   if (!data) return [null, null]
-  return [data.latitude, data.longitude]
+  return [data.latitude, data.longitude, data.country]
 }
 
 function validateData(data) {
