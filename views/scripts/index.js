@@ -12,14 +12,14 @@ function search() {
 }
 
 function changeCSS() {
-  const oldlink = document.getElementsByTagName("link").item(0);
-
+  const oldlink = findLink()
   const [cssFile, newMoon] = cssFileValidation(oldlink);
 
   const newlink = document.createElement("link");
 
   newlink.setAttribute("rel", "stylesheet");
   newlink.setAttribute("type", "text/css");
+  newlink.setAttribute("id", "main-style")
   newlink.setAttribute("href", cssFile);
 
   storeCssPrefs(cssFile);
@@ -42,6 +42,13 @@ function storeCssPrefs(change) {
   } else {
     localStorage.setItem("style", "light");
   }
+}
+
+function findLink() {
+  const links = Array.from(document.getElementsByTagName("link"));
+  const linkIndex = links.findIndex(i => i.id)
+  console.log(linkIndex)
+  return links[linkIndex]
 }
 
 function checkCssPrefs() {
