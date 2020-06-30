@@ -13,10 +13,10 @@ function search() {
 
 function changeCSS() {
   const oldlink = findLink()
-  const [cssFile, newMoon] = cssFileValidation(oldlink);
+  const [cssFile, newMoon] = cssFileValidation(oldlink.href);
+
 
   const newlink = document.createElement("link");
-
   newlink.setAttribute("rel", "stylesheet");
   newlink.setAttribute("type", "text/css");
   newlink.setAttribute("id", "main-style")
@@ -29,15 +29,16 @@ function changeCSS() {
 }
 
 function cssFileValidation(currentFile) {
-  if (currentFile.href == "http://localhost:7000/css/dark/index.css") {
-    return ["http://localhost:7000/css/light/index.css", "far fa-moon"];
+  console.log(currentFile)
+  if (currentFile == "http://localhost:7000/css/dark/index.css") {
+    return ["./css/light/index.css", "far fa-moon"];
   } else {
-    return ["http://localhost:7000/css/dark/index.css", "fas fa-moon"];
+    return ["./css/dark/index.css", "fas fa-moon"];
   }
 }
 
 function storeCssPrefs(change) {
-  if (change == "http://localhost:7000/css/dark/index.css") {
+  if (change == "./css/dark/index.css") {
     localStorage.setItem("style", "dark");
   } else {
     localStorage.setItem("style", "light");
@@ -47,7 +48,6 @@ function storeCssPrefs(change) {
 function findLink() {
   const links = Array.from(document.getElementsByTagName("link"));
   const linkIndex = links.findIndex(i => i.id)
-  console.log(linkIndex)
   return links[linkIndex]
 }
 

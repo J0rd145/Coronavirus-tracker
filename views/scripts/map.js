@@ -22,7 +22,7 @@ document.head.appendChild(script);
 async function getLatLng() {
   const country = document.getElementById("country-name").innerText;
   const data = await fetch(
-    `http://localhost:7000/latlngfor?country=${country}`
+    `/latlngfor?country=${country}`
   ).then((res) => res.json());
   return data;
 }

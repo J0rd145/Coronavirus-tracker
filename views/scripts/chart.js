@@ -38,7 +38,10 @@ function genGraph(data) {
 
 function getData() {
   const country = document.getElementById("country-name").innerText
-  fetch(`http://localhost:7000/history-for?country=${country}`)
+  fetch(`/history-for?country=${country}`, {
+    method: "GET", 
+    headers: { "Content-Type": "Application/JSON" }
+})
   .then(res => res.json())
   .then(data => data.errmsg ? genGraph() : genGraph(data)) 
 }
