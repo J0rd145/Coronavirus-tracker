@@ -12,7 +12,6 @@ function validateSearch(country, lastSearch) {
   }
   
   function validateChartData(data) {
-    console.log(data)
     countryData = new ChartData(data)
     return countryData 
     }

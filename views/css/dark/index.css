@@ -219,6 +219,7 @@ body::-webkit-scrollbar-thumb:hover {
 .data {
   padding: 20px;
   text-align: left;
+  margin: 20px auto;
   border-radius: 5px;
   background-color: #636363;
 }
@@ -366,7 +367,7 @@ option {
   background-repeat: no-repeat;
 }
 
-.flag-icon-XK {
+.flag-icon-xk {
   background-image: url("../../images/kosovo-flag.png");
   background-size: contain;
   background-position: 50%;
@@ -424,6 +425,7 @@ option {
   }
   .data {
     width: 100%;
+    margin: 0;
     margin-bottom: 10px;
   }
   .selection-area {
