@@ -54,7 +54,7 @@ function findLink() {
 function checkCssPrefs() {
   const checkbox = document.getElementById("dark-light");
   const prefs = localStorage.getItem("style");
-  if (prefs == "dark") {
+  if (prefs == "dark") { 
     checkbox.checked = true;
     return true;
   }
