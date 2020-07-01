@@ -63,5 +63,3 @@ module.exports = {
     worldwide: worldwide,
     countryNames: countryNames
 }
-
-worldwide()
