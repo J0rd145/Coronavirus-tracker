@@ -29,8 +29,8 @@ function changeCSS() {
 }
 
 function cssFileValidation(currentFile) {
-  console.log(currentFile)
-  if (currentFile == "http://localhost:7000/css/dark/index.css") {
+  const removedPrefix = removePrefix(currentFile.toString().split("/"))
+  if (removedPrefix == "./css/dark/index.css") {
     return ["./css/light/index.css", "far fa-moon"];
   } else {
     return ["./css/dark/index.css", "fas fa-moon"];
@@ -59,6 +59,10 @@ function checkCssPrefs() {
     return true;
   }
   return false;
+}
+
+function removePrefix(fullUrl) {
+  return `./${fullUrl[3]}/${fullUrl[4]}/${fullUrl[5]}`
 }
 
 window.onload = checkCssPrefs() ? changeCSS() : null;
