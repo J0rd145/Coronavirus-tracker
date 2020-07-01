@@ -1,6 +1,14 @@
 require("dotenv").config();
 const unirest = require("unirest");
 
+async function getData(search) {
+  if (search == "Global") {
+    return await Promise.all([ worldwide(), countryNames() ])
+  } else {
+    return await Promise.all([ country(search), countryNames() ])
+  }
+}
+
 async function worldwide() {
   return new Promise((resolve, reject) => {
     const req = unirest("GET", "https://covid-19-data.p.rapidapi.com/totals");
@@ -12,11 +20,9 @@ async function worldwide() {
     });
     req.end(async (res) => {
       if (res.error) return reject(res.error);
-      const additions = {
-        country: "Global",
-        code: "ww"
-      }
+      const additions = { country: "Global", code: "ww" }
       const worldwide = { ...additions, ...res.body[0] }
+      console.log("Done Fetching - Worldwide")
       return resolve(worldwide);
     });
   });
@@ -34,6 +40,7 @@ async function country(countryName) {
     req.end((res) => {
       if (res.error) return reject(res.error);
       if (!res.body) return reject("No Response Body Returned.");
+      console.log("Done Fetching - Country")
       return resolve(res.body[0]);
     });
   });
@@ -53,13 +60,12 @@ async function countryNames() {
     });
     req.end((res) => {
       if (res.error) return reject(res.error);
+      console.log("Done Fetching - Names")
       return resolve(res.body);
     });
   });
 }
 
 module.exports = {
-    country: country,
-    worldwide: worldwide,
-    countryNames: countryNames
+  getData: getData
 }
