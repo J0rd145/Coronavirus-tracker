@@ -109,8 +109,8 @@
           <% if (country.country != "Global") { %>
             <option>Global</option>
           <% } %> 
-            <% for ( let name in countryNames ) { %> 
-              <option><%= countryNames[name] %></option>
+            <% for ( let name of countryNames ) { %> 
+              <option><%= name %></option>
             <% } %>
         </select>
       </div>

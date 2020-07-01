@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT || 5000;
 const DB = require("mongoose")
 const { getCountry, chartData, latLng } = require("./API/database")
 const updateDB = require("./API/updateDB")
@@ -28,5 +28,11 @@ app.get("/history-for", chartData, (req, res) => {
 app.get("/latlngfor", latLng, (req, res) => {
   return res.status(200).json({ LatLng: req.LatLng })
 })
+
+updateDB()
+
+setTimeout(() => {
+  updateDB()
+}, 900000)
 
 app.listen(PORT, () => console.log(`Listening On Port ${PORT}`));
