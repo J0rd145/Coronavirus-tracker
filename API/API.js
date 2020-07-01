@@ -22,7 +22,6 @@ async function worldwide() {
       if (res.error) return reject(res.error);
       const additions = { country: "Global", code: "ww" }
       const worldwide = { ...additions, ...res.body[0] }
-      console.log("Done Fetching - Worldwide")
       return resolve(worldwide);
     });
   });
@@ -40,7 +39,6 @@ async function country(countryName) {
     req.end((res) => {
       if (res.error) return reject(res.error);
       if (!res.body) return reject("No Response Body Returned.");
-      console.log("Done Fetching - Country")
       return resolve(res.body[0]);
     });
   });
@@ -60,7 +58,6 @@ async function countryNames() {
     });
     req.end((res) => {
       if (res.error) return reject(res.error);
-      console.log("Done Fetching - Names")
       return resolve(res.body);
     });
   });
