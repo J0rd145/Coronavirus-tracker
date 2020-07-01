@@ -1,4 +1,4 @@
-const { Data, Unknown, ChartData } = require("./classes");
+const { ChartData } = require("./classes");
 
 function validateSearch(country, lastSearch) {
     if (country) return country
@@ -12,25 +12,42 @@ function validateSearch(country, lastSearch) {
   }
   
   function validateChartData(data) {
-    !data ? countryData = new Unknown(data) : countryData = new ChartData(data)
+    console.log(data)
+    countryData = new ChartData(data)
     return countryData 
     }
   
   function validateLatLng(data) {
     if (!data) return [null, null]
-    return [data.latitude, data.longitude, data.country]
+    return [data.lat, data.lng, data.country]
   }
   
-  function validateData(data) {
-    !data[0] ? countryData = new Unknown(data[0]) : countryData = new Data(data[0])
-    !data[1] ? countrynames = undefined : countrynames = data[1].map((i) => [i.country]).sort();
-    return [countryData, countrynames]
+  function validateData(data, countryName) {
+    const searchCountry = data.findIndex(i => i.country == countryName)
+    const countryData = data[searchCountry]
+    const countryNames = data.map((i) => [i.country]).sort();
+    return [countryData, countryNames]
   }
   
+  function validateDBEntry(data) {
+    if (data.country == "Diamond Princess" || data.country == "MS Zaandam") {
+      data.code = "AA";
+      data.latitude = 0
+      data.longitude = 0
+    } else if (data.country == "Channel Islands") {
+      data.code = "KL";
+    } else if (data.country == "Kosovo* (disputed teritory)") {
+      data.code = "XK"
+      data.country = "Kosovo"
+    }
+    return data
+  }
+
 module.exports = {
     search: validateSearch,
     cookie: validateCookie,
     chartData: validateChartData,
     latLng: validateLatLng,
-    data: validateData
+    data: validateData,
+    DBEntry: validateDBEntry
 }

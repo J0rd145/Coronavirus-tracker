@@ -7,6 +7,8 @@ class Data {
     this.deaths = addCommas(value.deaths),
     this.lastUpdate = formatDate(value.lastUpdate),
     this.code = value.code
+    this.lat = value.latitude
+    this.lng = value.longitude
   }
 }
 class ChartData {
@@ -19,21 +21,9 @@ class ChartData {
   }
 }
 
-class Unknown {
-  constructor() {
-    this.confirmed = null
-    this.critical = null
-    this.deaths = null
-    this.recovered = null
-    this.lastUpdate = null
-    this.code = null
-  }
-}
-
 module.exports = {
   Data: Data,
   ChartData: ChartData,
-  Unknown: Unknown,
 };
 
 function addCommas(nStr) {
